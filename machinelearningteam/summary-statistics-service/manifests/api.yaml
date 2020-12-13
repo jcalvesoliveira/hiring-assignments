@@ -24,6 +24,7 @@ spec:
   selector:
     matchLabels:
       app: summarizer
+  replicas: 2
   template:
     metadata:
       labels:
@@ -36,8 +37,7 @@ spec:
       terminationGracePeriodSeconds: 60
       containers:
         - name: summarizer
-          image: # Image needs building
-          command: ["/app/service"]
+          image: gcr.io/visma-hiring/summary-service
           args: []
           ports:
             - containerPort: 50051
@@ -51,8 +51,20 @@ spec:
           readinessProbe:
             exec:
               command:
-                ["/bin/grpc-health-probe", "-addr=:50051"]
+                [
+                  "/bin/grpc_health_probe",
+                  "-addr=:50051",
+                  "-connect-timeout=100ms",
+                  "-rpc-timeout=150ms",
+                ]
+            initialDelaySeconds: 5
           livenessProbe:
             exec:
               command:
-                ["/bin/grpc-health-probe", "-addr=:50051"]
+                [
+                  "/bin/grpc_health_probe",
+                  "-addr=:50051",
+                  "-connect-timeout=100ms",
+                  "-rpc-timeout=150ms",
+                ]
+            initialDelaySeconds: 10

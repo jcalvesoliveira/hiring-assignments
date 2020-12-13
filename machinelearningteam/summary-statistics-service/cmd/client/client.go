@@ -2,15 +2,16 @@ package main
 
 import (
 	"context"
-	pb "github.com/e-conomic/hiring-assignments/machinelearningteam/summary-statistics-service/proto"
 	"io/ioutil"
 	"log"
+
+	pb "github.com/e-conomic/hiring-assignments/machinelearningteam/summary-statistics-service/proto"
 
 	"google.golang.org/grpc"
 )
 
 const (
-	host = "localhost:50051"
+	host = "34.68.0.193:50051"
 )
 
 func main() {
