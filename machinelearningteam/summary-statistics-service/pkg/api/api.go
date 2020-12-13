@@ -3,7 +3,9 @@ package api
 import (
 	"context"
 	"fmt"
+	"io/ioutil"
 	"log"
+	"net/http"
 
 	"google.golang.org/grpc"
 
@@ -34,9 +36,22 @@ func (s *Server) SummarizeDocument(
 	defer conn.Close()
 	client := api.NewStatisticsProcesserClient(conn)
 
-	doc_content := req.Document.GetContent()
+	docContent := req.Document.GetContent()
+	if docContent == nil {
+		httpURI := req.Document.GetSource().GetHttpUri()
+		resp, err := http.Get(httpURI)
+		if err != nil {
+			log.Fatalf("not able to get file from url: %v", err)
+		}
+		defer resp.Body.Close()
+		docContent, err = ioutil.ReadAll(resp.Body)
+		if err != nil {
+			log.Fatalf("not able to convert request body into bytes: %v", err)
+		}
+	}
+
 	resp, err := client.ProcessDocument(context.Background(), &api.ProcessDocumentRequest{
-		Content: doc_content,
+		Content: docContent,
 	},
 	)
 
