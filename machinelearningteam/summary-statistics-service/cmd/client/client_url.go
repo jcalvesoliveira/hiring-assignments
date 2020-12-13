@@ -26,7 +26,7 @@ func main() {
 	resp, err := client.SummarizeDocument(ctx, &pb.SummarizeDocumentRequest{
 		Document: &pb.Document{
 			Source: &pb.DocumentSource{
-				HttpUri: "https://raw.githubusercontent.com/jcalvesoliveira/hiring-assignments/master/machinelearningteam/summary-statistics-service/test.csv",
+				HttpUri: "https://raw.githubusercontent.com/e-conomic/hiring-assignments/master/machinelearningteam/summary-statistics-service/test.csv",
 			},
 		},
 	})
