@@ -13,7 +13,7 @@ import (
 )
 
 const (
-	host = "localhost:50050"
+	host = "34.66.243.58:50050"
 )
 
 // Server is a server implementing the proto API
