@@ -37,7 +37,7 @@ spec:
       terminationGracePeriodSeconds: 60
       containers:
         - name: summarizer
-          image: gcr.io/visma-hiring/summary-service
+          image: gcr.io/visma-interview/summary-service
           args: []
           ports:
             - containerPort: 50051
