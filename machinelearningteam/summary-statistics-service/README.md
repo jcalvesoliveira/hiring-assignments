@@ -1,3 +1,17 @@
+## Assignment changes applied on this service
+
+### Deploy
+This service is running in a GKE instance on Google Cloud Platform and can be accessed at `35.223.122.149:50051`
+
+### Redirect
+Any document received by this API is sent for calculation at the [statistics-processing](https://github.com/jcalvesoliveira/statistics-processing) micro-service.
+
+### Document or URL
+This api is able to receive either a URL for downloading documents or documents bytes.
+
+
+
+----------------------------
 # Assignment used for Software Engineer position
 This task is intended for candidates applying for a Software Engineer position at the Visma Machine Learning team. The assignment is built around the technologies and stack used in the production environments of the team, and the problem is a toy version of some of the tasks we face.
 
