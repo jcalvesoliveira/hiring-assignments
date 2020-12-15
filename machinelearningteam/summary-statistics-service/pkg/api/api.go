@@ -21,7 +21,8 @@ type Server struct {
 	api.UnimplementedDocumentSummarizerServer
 }
 
-// SummarizeDocument echoes the document provided in the request
+// SummarizeDocument send the document provided in the request
+// to calculate in the statistics-processing micro-service
 func (s *Server) SummarizeDocument(
 	ctx context.Context,
 	req *api.SummarizeDocumentRequest,
@@ -36,6 +37,7 @@ func (s *Server) SummarizeDocument(
 	defer conn.Close()
 	client := api.NewStatisticsProcesserClient(conn)
 
+	// If no document bytes is provided, look for url to download
 	docContent := req.Document.GetContent()
 	if docContent == nil {
 		httpURI := req.Document.GetSource().GetHttpUri()
